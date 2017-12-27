@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.parent.employee</groupId>
     <artifactId>employee-parent</artifactId>
-    <version>1.9.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>employee-parent</name>
     <description>employee-parent</description>
@@ -38,7 +38,7 @@
     <modules>
         <module>employeeDao</module>
         <module>employeeServices</module>
-        <module>employeeServiceWeb</module>
+        <module>employeeWebServices</module>
     </modules>
     <profiles>
         <profile>
