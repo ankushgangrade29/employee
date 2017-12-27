@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.parent.employee</groupId>
+        <artifactId>employee-parent</artifactId>
+        <version>1.9.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <groupId>com.employee.service</groupId>
+    <artifactId>employeeServices</artifactId>
+    <packaging>jar</packaging>
+    <name>employeeServices</name>
+    <description>employeeServices</description>
+   
+    <prerequisites>
+        <maven>3.2.0</maven>
+    </prerequisites>
+
+    <properties>
+        <employeeDao.version>1.9.0-SNAPSHOT</employeeDao.version>
+        <maven-compiler-plugin>3.5.1</maven-compiler-plugin>
+        <source-version>1.8</source-version>
+        <target-version>1.8</target-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin}</version>
+                <configuration>
+                    <source>${source-version}</source>
+                    <target>${target-version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.employee.dao</groupId>
+            <artifactId>employeeDao</artifactId>
+            <version>${employeeDao.version}</version>
+        </dependency>
+    </dependencies>
+</project>
