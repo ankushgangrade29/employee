@@ -11,7 +11,7 @@ import javax.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.client.ClientConfig;
 
 public class WebServicesTest {
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		ClientConfig config = new ClientConfig();
 
 		Client client = ClientBuilder.newClient(config);
@@ -28,5 +28,5 @@ public class WebServicesTest {
 	private static URI getBaseURI() {
 		return UriBuilder.fromUri("http://localhost:18080/employee")
 				.build();
-	}
+	}*/
 }

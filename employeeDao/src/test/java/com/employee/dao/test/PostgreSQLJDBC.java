@@ -40,9 +40,10 @@ public class PostgreSQLJDBC {
    }
    
    public static void selectQuery(){
-	   String selectQuery = "select * from employee.employee_details";
+	   String selectQuery = "select * from employee.employee_details where \"empId\"=?";
 	   try {
 		PreparedStatement ps =  c.prepareStatement(selectQuery);
+		ps.setInt(1, 3);
 		   ResultSet rs = ps.executeQuery();
 		   while(rs.next()){
 		  	 System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4));
@@ -54,10 +55,11 @@ public class PostgreSQLJDBC {
    
    
    public static void updateQuery(){
-	   String updateQuery = "update EMPLOYEE.EMPLOYEE_DETAILS set \"empAddress\" = 'London' where \"empId\"=5";
+	   String updateQuery = "update EMPLOYEE.EMPLOYEE_DETAILS set \"empAddress\" = 'California' where \"empId\"=5";
 	   try {
 		PreparedStatement ps = c.prepareStatement(updateQuery);
-		   ps.executeUpdate();
+		int result =   ps.executeUpdate();
+		System.out.println(result);
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
@@ -67,7 +69,8 @@ public class PostgreSQLJDBC {
 	   String deleteQuery = "delete from employee.employee_details where \"empId\"=5";
 	   try {
 		PreparedStatement ps =  c.prepareStatement(deleteQuery);
-		ps.executeUpdate();
+		int result = ps.executeUpdate();
+		System.out.println(result);
 		   /*ResultSet rs = ps.executeQuery();
 		   while(rs.next()){
 		  	 System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4));
