@@ -64,7 +64,7 @@ public class WebServices {
     @Path("/getEmp")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEmployeeRecords(@QueryParam("empId") int empId, @Context HttpServletRequest httpRequest) {
-    	System.out.println("Hi we are in web service layer");
+    	System.out.println("We are in getEmployeeRecords "+empId);
     	/*BaseServices service = new BaseServicesImpl();
     	service.getServiceLayerDetails();
     	*/

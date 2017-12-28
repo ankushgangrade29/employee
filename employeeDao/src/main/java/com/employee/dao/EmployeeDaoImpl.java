@@ -49,17 +49,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		try {
 			conn = DBConnection.getConnection();
+			System.out.println("Value of selectQuerty "+selectQuery);
 			PreparedStatement ps = conn.prepareStatement(selectQuery);
 			if(empId>0) {
 				ps.setInt(1, empId);
 			}
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
+				System.out.println("We are in resultSet.next()");
 				EmployeeDaoResponse dto = new EmployeeDaoResponse();
 				dto.setEmpId(rs.getInt(1));
 				dto.setEmpName(rs.getString(2));
 				dto.setEmpAddress(rs.getString(3));
-				dto.setGender(rs.getString(rs.getString(4)));
+				dto.setGender(rs.getString(4));
 				listDto.add(dto);
 			}
 		} catch (SQLException e) {

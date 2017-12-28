@@ -33,10 +33,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 		List<EmployeeServiceResponse> serviceList = new ArrayList<EmployeeServiceResponse>();
 		dao = new EmployeeDaoImpl();
 		List<EmployeeDaoResponse> daoList = dao.selectQuery(empId);
+		for(EmployeeDaoResponse daoResponse : daoList){
+			System.out.println("Value of EMPNAME : " + daoResponse.getEmpName());
+		}
+		
+		try {
+			for(EmployeeDaoResponse dao : daoList){
+				EmployeeServiceResponse serviceResponse = new EmployeeServiceResponse();
+				BeanUtils.copyProperties(serviceResponse, dao );
+				serviceList.add(serviceResponse);
+			}
+			
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		/*
 		try {
 			BeanUtils.copyProperties(serviceList, daoList);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
+		}*/
+		for(EmployeeServiceResponse serviceResponse : serviceList){
+			System.out.println("Value of EMPNAME serviceList : " + serviceResponse.getEmpName());
 		}
 		return serviceList;
 	}
