@@ -24,6 +24,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+
+
+
+    <dependencies>
+		    <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+		<dependency>
+		    <groupId>postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>9.4.1208-jdbc42-atlassian-hosted</version>
+		</dependency>
+    </dependencies>
+    
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
