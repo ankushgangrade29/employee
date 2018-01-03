@@ -5,7 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NameClassPair;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import org.jboss.as.remoting.Namespace;
 
 import com.employee.dao.request.EmployeeSearchCriteria;
 import com.employee.dao.response.EmployeeDaoResponse;
@@ -42,13 +52,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public List<EmployeeDaoResponse> selectQuery(int empId) {
+		System.out.println("Calling getConnection");
+		conn = getConnection();
+		System.out.println("Done");
 		List<EmployeeDaoResponse> listDto = new ArrayList<EmployeeDaoResponse>();
 		String selectQuery = "select * from employee.employee_details";
 		if(empId>0) {
 			selectQuery = selectQuery+" where \"empId\"=?";
 		}
 		try {
-			conn = DBConnection.getConnection();
+			if(conn==null){
+				System.out.println("Value of ds.getConnection is null");
+				conn = DBConnection.getConnection();
+			}
+			System.out.println("Value of ds.getConnection is not null");
 			System.out.println("Value of selectQuerty "+selectQuery);
 			PreparedStatement ps = conn.prepareStatement(selectQuery);
 			if(empId>0) {
@@ -116,5 +133,44 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		return deleted;
 	}
+	
+	public Connection getConnection(){
+		Connection conn = null;
+		try {
+			/*Properties props = new Properties();
+			props.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.InitialContextFactory");
+			props.setProperty(Context.PROVIDER_URL, "localhost:8080");
+			props.setProperty(Context.SECURITY_PRINCIPAL, "sa");
+			props.setProperty(Context.SECURITY_AUTHENTICATION, "sa");
+			*/
+			Context con = new InitialContext();
+			DataSource ds = (DataSource)con.lookup("java:/PostgresDS");
+			try {
+				Enumeration<NameClassPair> names = con.list("");
+				System.out.println("Before while loop");
+				while(names.hasMoreElements()){
+					System.out.println("inside while loop");
+					NameClassPair pair = names.nextElement();
+					System.out.println(pair.getName()+"\t"+pair.getNameInNamespace());
+				}
+				System.out.println("End of while loop");
+			}catch(Exception  e){
+				System.out.println("Exception in nameclasspair");
+				e.printStackTrace();
+			}
+			
+			
+			conn = ds.getConnection();
+			System.out.println("Value of Connection : "+conn);
+		} catch (NamingException | SQLException e) {
+			e.printStackTrace();
+		}
+		return conn;
+	}
+	
+/*	public void main(String[] args) {
+		DataSourceConnection ds = new DataSourceConnection();
+		ds.getConnection();
+	}*/
 
 }
